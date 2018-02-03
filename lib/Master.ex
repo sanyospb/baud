@@ -64,12 +64,18 @@ defmodule Modbus.Rtu.Master do
         length = Rtu.res_len(cmd)
         :ok = Sniff.write(nid, request)
         response = read_n(nid, [], 0, length, dl)
-        ^length = byte_size(response)
-        values = Rtu.parse_res(cmd, response)
 
-        case values do
-          nil -> :ok
-          _ -> {:ok, values}
+        case byte_size(response) do
+          ^length ->
+            values = Rtu.parse_res(cmd, response)
+
+            case values do
+              nil -> :ok
+              _ -> {:ok, values}
+            end
+
+          _ ->
+            {:error, "Modbus -> wrong response #{inspect(response)}"}
         end
       end,
       2 * timeout
