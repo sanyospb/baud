@@ -64,6 +64,7 @@ defmodule Modbus.Rtu.Master do
         length = Rtu.res_len(cmd)
         :ok = Sniff.write(nid, request)
         response = read_n(nid, [], 0, length, dl)
+        :timer.sleep(1)
 
         case byte_size(response) do
           ^length ->
