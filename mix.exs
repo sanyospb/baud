@@ -21,7 +21,7 @@ defmodule Baud.Mixfile do
   defp deps do
     [
       {:sniff, git: "https://github.com/samuelventura/sniff.git"},
-      {:modbus, "~> 0.3.7"},
+      {:modbus, git: "https://github.com/sanyospb/modbus.git"},
       {:ex_doc, "~> 0.12", only: :dev},
     ]
   end
