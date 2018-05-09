@@ -71,12 +71,13 @@ defmodule Modbus.Rtu.Master do
             values = Rtu.parse_res(cmd, response)
 
             case values do
+              :error -> {:error, "[Modbus.Rtu] -> wrong response #{inspect(response)}"}
               nil -> :ok
               _ -> {:ok, values}
             end
 
           _ ->
-            {:error, "Modbus -> wrong response #{inspect(response)}"}
+            {:error, "[Modbus.Master] -> wrong response #{inspect(response)}"}
         end
       end,
       2 * timeout
