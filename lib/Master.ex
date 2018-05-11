@@ -1,5 +1,6 @@
 defmodule Modbus.Rtu.Master do
   use Agent
+  require Logger
 
   @moduledoc """
     RTU module.
