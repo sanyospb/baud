@@ -2,6 +2,7 @@
 /cover
 /deps
 /doc
+/.elixir_ls
 *.dump
 *.ez
 *.tar
