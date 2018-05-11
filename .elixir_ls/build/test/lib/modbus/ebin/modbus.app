@@ -1,0 +1,10 @@
+{application,modbus,
+             [{applications,[kernel,stdlib,elixir]},
+              {description,"Modbus library with TCP Master & Slave implementation."},
+              {modules,['Elixir.Modbus.Helper','Elixir.Modbus.IEEE754',
+                        'Elixir.Modbus.Model','Elixir.Modbus.Model.Shared',
+                        'Elixir.Modbus.Request','Elixir.Modbus.Response',
+                        'Elixir.Modbus.Rtu','Elixir.Modbus.Tcp',
+                        'Elixir.Modbus.Tcp.Master','Elixir.Modbus.Tcp.Slave']},
+              {registered,[]},
+              {vsn,"0.3.7"}]}.

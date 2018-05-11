@@ -98,20 +98,27 @@ defmodule Modbus.Rtu.Master do
         flat(iol)
 
       false ->
-        {:ok, data} = Sniff.read(nid)
+        sniff_read = Sniff.read(nid)
 
-        case data do
-          <<>> ->
-            :timer.sleep(@sleep)
-            now = now()
+        case sniff_read do
+          {:ok, data} ->
+            case data do
+              <<>> ->
+                :timer.sleep(@sleep)
+                now = now()
 
-            case now > dl do
-              true -> flat(iol)
-              false -> read_n(nid, iol, size, count, dl)
+                case now > dl do
+                  true -> flat(iol)
+                  false -> read_n(nid, iol, size, count, dl)
+                end
+
+              _ ->
+                read_n(nid, [data | iol], size + byte_size(data), count, dl)
             end
 
-          _ ->
-            read_n(nid, [data | iol], size + byte_size(data), count, dl)
+          {:er, error} ->
+            Logger.error("Sniff read error - #{inspect(error)}")
+            nil
         end
     end
   end
