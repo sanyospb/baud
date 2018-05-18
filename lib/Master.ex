@@ -119,7 +119,7 @@ defmodule Modbus.Rtu.Master do
 
           {:er, error} ->
             Logger.error("Sniff read error - #{inspect(error)}")
-            nil
+            <<>>
         end
     end
   end
